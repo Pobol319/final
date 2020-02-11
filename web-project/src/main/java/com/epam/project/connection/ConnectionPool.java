@@ -17,7 +17,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class ConnectionPool {
     private static final Logger LOG = LogManager.getLogger(ConnectionPool.class);
 
-    private static final int MAX_POOL_SIZE = 13;
+    private static int MAX_POOL_SIZE;
     private Semaphore semaphore = new Semaphore(MAX_POOL_SIZE);
     private static final AtomicReference<ConnectionPool> instance = new AtomicReference<>();
 
@@ -35,7 +35,7 @@ public class ConnectionPool {
     private void createPool() {
         for (int i = 0; i < MAX_POOL_SIZE; i++) {
             try {
-                ProxyConnection connection = ConnectionFactory.create(this);
+                ProxyConnection connection = new ProxyConnection(ConnectionFactory.create(), this);
                 availableConnections.add(connection);
             } catch (ConnectionFactoryException e) {
                 LOG.error("Error with creation of connection", e);
@@ -43,12 +43,18 @@ public class ConnectionPool {
         }
     }
 
-    public static ConnectionPool getInstance() {
+    public static ConnectionPool getInstance() throws ConnectionPoolException {
         Lock lock = new ReentrantLock();
         if (instance.get() == null) {
             lock.lock();
             try {
-                instance.compareAndSet(null, new ConnectionPool());
+                try {
+                    ConnectionFactory.readProperties();
+                    MAX_POOL_SIZE = ConnectionFactory.getMaxPoolSize();
+                    instance.compareAndSet(null, new ConnectionPool());
+                } catch (ConnectionFactoryException e) {
+                    throw new ConnectionPoolException("Problems with ConnectionPool", e);
+                }
             } finally {
                 lock.unlock();
             }
@@ -68,7 +74,6 @@ public class ConnectionPool {
             semaphore.release();
         }
     }
-
 
     public ProxyConnection getConnection() throws ConnectionPoolException {
         ProxyConnection proxyConnection;

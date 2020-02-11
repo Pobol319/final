@@ -2,10 +2,8 @@ package com.epam.project.service;
 
 import com.epam.project.dao.DaoHelper;
 import com.epam.project.dao.DaoHelperFactory;
-import com.epam.project.dao.interfaces.FacultyDao;
-import com.epam.project.dao.interfaces.UserDao;
+import com.epam.project.dao.api.FacultyDao;
 import com.epam.project.entity.Faculty;
-import com.epam.project.entity.User;
 import com.epam.project.exceptions.ConnectionPoolException;
 import com.epam.project.exceptions.DaoException;
 import com.epam.project.exceptions.ServiceException;

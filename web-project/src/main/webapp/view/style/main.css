@@ -12,7 +12,9 @@ body {
     background-color: silver;
 }
 
-*:focus {outline: none;}
+*:focus {
+    outline: none;
+}
 
 .centered {
     text-align: center;
@@ -71,6 +73,14 @@ body {
 
 .table-actions {
     text-align: center;
+}
+
+.rows {
+    height: 55%;
+    width: 35.58%;
+    overflow: auto;
+    left: 37%;
+    position: absolute;
 }
 
 .table-actions table {
@@ -197,6 +207,7 @@ form {
 .vertical-menu .sub-menu {
     border-bottom: 1px solid white;
 }
+
 /*----------------------*/
 
 .vertical-menu form {
@@ -222,6 +233,12 @@ form {
 
 .inner-content h1 {
     text-align: center;
+    font-weight: 100;
+    margin: 50px auto;
+    width: 500px;
+    border-radius: 10px;
+    background-color: #21805c;
+    border: 1px solid white;
 }
 
 .inner-content #current-user {
@@ -302,7 +319,7 @@ form {
 }
 
 .inner-content button {
-    background-color: white;
+    background-color: lightseagreen;
     border: 1px solid black;
     border-radius: 5px;
     font-size: 15px;
@@ -319,7 +336,7 @@ form {
     border-radius: 5px;
     background-color: lightseagreen;
     width: 400px;
-    margin: auto auto 10px;
+    margin: auto 110px 10px;
     position: relative;
 }
 
@@ -354,3 +371,67 @@ form {
     padding: 5px 10px;
 }
 
+/*Register Statements*/
+
+.confirm-act {
+    margin-right: 50px;
+    padding-left: 1070px;
+}
+
+.confirm-act p {
+    padding-right: 10%;
+}
+
+/*Register to faculty*/
+
+.registration{
+    display: block;
+    padding: 10px;
+    border: 1px solid white;
+    border-radius: 5px;
+    background-color: lightseagreen;
+    width: 400px;
+    margin: 10px 10px 10px 700px;
+    position: relative;
+    bottom: 370px;
+}
+
+.registration button{
+    background-color: lightseagreen;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+/*Delete statement*/
+
+.table-actions, .inner-content button{
+    caption-side: bottom;
+}
+
+.statement-content{
+    background-color: lightseagreen;
+    margin: 50px auto;
+    width: 250px;
+    font-weight: 100;
+    border-radius: 10px;
+    border: 1px solid white;
+}
+
+/*Enroll students*/
+
+.display-table-inline{
+    display: inline-block;
+    text-align: center;
+    margin-left: 50px;
+}
+
+.user-tag{
+    font-size: 25px;
+    text-align: center;
+    margin: 50px auto;
+    width: 500px;
+    border-radius: 10px;
+    background-color: #21805c;
+    border: 1px solid white;
+}

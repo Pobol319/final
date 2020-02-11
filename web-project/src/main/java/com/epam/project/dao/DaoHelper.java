@@ -2,12 +2,10 @@ package com.epam.project.dao;
 
 import com.epam.project.connection.ConnectionPool;
 import com.epam.project.connection.ProxyConnection;
-import com.epam.project.dao.implementations.*;
-import com.epam.project.dao.interfaces.*;
-import com.epam.project.exceptions.ConnectionFactoryException;
+import com.epam.project.dao.impl.*;
+import com.epam.project.dao.api.*;
 import com.epam.project.exceptions.ConnectionPoolException;
 import com.epam.project.exceptions.DaoException;
-import com.epam.project.exceptions.PropertyReaderException;
 
 import java.sql.SQLException;
 

@@ -14,28 +14,39 @@
         <c:import url="/view/page/general/top_panel.jsp"/>
         <c:import url="/view/page/usual/left_panel.jsp"/>
 
+
         <c:if test="${isUserHaveStatement eq true}">
             <div class="inner-content">
                 <h1><fmx:message bundle="${lookStatementB}" key="head"/></h1>
-                <h3><fmx:message bundle="${lookStatementB}" key="statement"/> #${statementDto.statement.id}</h3>
-                <h3><fmx:message bundle="${lookStatementB}" key="faculty"/> - ${statementDto.faculty.name}</h3>
-                <h3><fmx:message bundle="${lookStatementB}" key="statementDate"/> - ${statementDto.statement.date}</h3>
-                <c:forEach items="${subjects}" var="subject" varStatus="status">
-                    <div class="inner-content">
-                        <p> ${subject.name} - ${points[status.index].numberOfPoints}</p>
+                <div class="table-actions">
+                    <div class="statement-content">
+                        <h3><fmx:message bundle="${lookStatementB}" key="statement"/> #${statementDto.statement.id}</h3>
+                        <h3><fmx:message bundle="${lookStatementB}" key="faculty"/> - ${statementDto.faculty.name}</h3>
+                        <h3><fmx:message bundle="${lookStatementB}"
+                                         key="statementDate"/>: ${statementDto.statement.date}</h3>
                     </div>
-                </c:forEach>
-            </div>
+                    <table>
+                        <tr>
+                            <th><fmx:message bundle="${lookStatementB}" key="subject.name"/></th>
+                            <th><fmx:message bundle="${lookStatementB}" key="received.points"/></th>
+                        </tr>
+                        <c:forEach items="${subjects}" var="subject" varStatus="status">
+                            <tr>
+                                <td><fmx:message bundle="${lookStatementB}" key="subject.${subject.name}"/></td>
+                                <td><c:out value="${points[status.index].numberOfPoints}"></c:out></td>
+                            </tr>
+                        </c:forEach>
+                    </table>
 
+                    <form method="post" action="<c:url value="/command"/>">
+                        <input type="hidden" name="command" value="delete_statement">
+                        <input type="hidden" name="statementId" value="${statementDto.statement.id}">
+                        <button type="submit">
+                            <fmx:message bundle="${lookStatementB}" key="delete.statement"/>
+                        </button>
+                    </form>
 
-            <div class="centered">
-                <form method="post" action="<c:url value="/command"/>">
-                    <input type="hidden" name="command" value="delete_statement">
-                    <input type="hidden" name="statementId" value="${statementDto.statement.id}">
-                    <button type="submit">
-                        <fmx:message bundle="${lookStatementB}" key="delete.statement"/>
-                    </button>
-                </form>
+                </div>
             </div>
 
 

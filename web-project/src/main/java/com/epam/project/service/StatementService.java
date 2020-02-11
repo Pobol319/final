@@ -2,7 +2,7 @@ package com.epam.project.service;
 
 import com.epam.project.dao.DaoHelper;
 import com.epam.project.dao.DaoHelperFactory;
-import com.epam.project.dao.interfaces.StatementDao;
+import com.epam.project.dao.api.StatementDao;
 import com.epam.project.entity.Statement;
 import com.epam.project.exceptions.ConnectionPoolException;
 import com.epam.project.exceptions.DaoException;

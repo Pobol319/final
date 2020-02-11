@@ -29,17 +29,22 @@ public class ConfirmActOnStatementsRegistrationPageCommand implements Command {
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
         LOG.info("ConfirmActOnStatementsRegistrationPageCommand - done ");
 
+        String registerOrDeregisterCommandString = request.getParameter("registerOrUnregisterCommand");
+        boolean registerOrDeregisterCommandStringBoolean = !Boolean.parseBoolean(registerOrDeregisterCommandString);
+
         String[] statementsIdStringArray;
         List<Integer> statementsIdIntegerList;
+
         try {
             statementsIdStringArray = request.getParameterValues("statementId");
             statementsIdIntegerList = convertStringArrayToIntegerList(statementsIdStringArray);
         } catch (NullPointerException e) {
-            return CommandResult.forward(PAGE);
+            if (registerOrDeregisterCommandStringBoolean) {
+                return CommandResult.redirect(PAGE_REGISTRATION);
+            } else {
+                return CommandResult.redirect(PAGE_DEREGISTRATION);
+            }
         }
-
-        String registerOrDeregisterCommandString = request.getParameter("registerOrUnregisterCommand");
-        boolean registerOrDeregisterCommandStringBoolean = !Boolean.parseBoolean(registerOrDeregisterCommandString);
 
         for (Integer statementId : statementsIdIntegerList) {
             statementService.updateStatementRegistrationByStatementId(statementId, registerOrDeregisterCommandStringBoolean);

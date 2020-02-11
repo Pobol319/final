@@ -2,8 +2,8 @@ package com.epam.project.service.transaction;
 
 import com.epam.project.dao.DaoHelper;
 import com.epam.project.dao.DaoHelperFactory;
-import com.epam.project.dao.interfaces.PointsOnSubjectDao;
-import com.epam.project.dao.interfaces.StatementDao;
+import com.epam.project.dao.api.PointsOnSubjectDao;
+import com.epam.project.dao.api.StatementDao;
 import com.epam.project.entity.PointsOnSubject;
 import com.epam.project.entity.Statement;
 import com.epam.project.entity.Subject;
@@ -23,7 +23,7 @@ public class CreateStatementTransactionService {
         this.daoHelperFactory = daoHelperFactory;
     }
 
-    public void createStatementAndPointsOnSubjects(User user, FacultyDto facultyDto, String[] points)
+    public void createStatementAndPointsOnSubjects(User user, FacultyDto facultyDto, List<Integer> points)
             throws ServiceException {
         try (DaoHelper factory = daoHelperFactory.create()) {
             factory.startTransaction();
@@ -31,16 +31,15 @@ public class CreateStatementTransactionService {
                 StatementDao statementDao = factory.createStatementDao();
                 PointsOnSubjectDao pointsOnSubjectDao = factory.createPointsOnSubjectDao();
 
-                List<Integer> pointsOnSubjects = convertArrayFromStringToInt(points);
-                Integer statementId = user.hashCode();
+                Integer statementId = user.getId();
                 Integer userId = user.getId();
                 Integer facultyId = facultyDto.getFaculty().getId();
                 createStatement(statementId, userId, facultyId, statementDao);
 
                 List<Subject> subjects = facultyDto.getSubjects();
-                for (int i = 0; i < pointsOnSubjects.size(); i++) {
+                for (int i = 0; i < points.size(); i++) {
                     Integer subjectId = subjects.get(i).getId();
-                    createPointsOnSubject(pointsOnSubjects.get(i), subjectId, statementId, pointsOnSubjectDao);
+                    createPointsOnSubject(points.get(i), subjectId, statementId, pointsOnSubjectDao);
                 }
                 factory.commitTransaction();
             } catch (DaoException e) {

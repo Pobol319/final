@@ -13,11 +13,14 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class CreateStatementCommand implements Command {
     private static final Logger LOG = LogManager.getRootLogger();
-    private static final String PAGE = "/command?command=register_to_faculty";
+    private static final String PAGE = "/view/page/usual/register_to_faculty.jsp";
+    private static final String PAGE_WHEN_USER_HAVE_STATEMENT = "/command?command=register_to_faculty";
 
     private StatementService statementService;
     private FacultyDtoService facultyDtoService;
@@ -35,7 +38,8 @@ public class CreateStatementCommand implements Command {
         LOG.info("CreateStatementCommand - done ");
 
         HttpSession session = request.getSession();
-        String[] pointsString = request.getParameterValues("points");
+        String[] pointsStringArray = request.getParameterValues("points");
+        List<Integer> pointsIntegerList = convertArrayFromStringToInt(pointsStringArray);
         String facultyIdString = request.getParameter("selectedFacultyId");
         Integer facultyIdInt = Integer.parseInt(facultyIdString);
 
@@ -43,15 +47,23 @@ public class CreateStatementCommand implements Command {
         Integer userId = user.getId();
 
         if (statementService.doesUserHaveStatement(userId)) {
-            request.setAttribute("answerForCreateStatement", "0");
-            return CommandResult.forward(PAGE);
+            request.setAttribute("userHaveStatement", true);
+            return CommandResult.forward(PAGE_WHEN_USER_HAVE_STATEMENT);
         }
 
         FacultyDto facultyDto = facultyDtoService.getFacultyDtoInfo(facultyIdInt);
-        statementTransactionService.createStatementAndPointsOnSubjects(user,facultyDto,pointsString);
+        statementTransactionService.createStatementAndPointsOnSubjects(user,facultyDto,pointsIntegerList);
 
-        request.setAttribute("answerForCreateStatement", "1");
         return CommandResult.redirect(PAGE);
+    }
+
+    private List<Integer> convertArrayFromStringToInt(String[] stringArray) {
+        List<Integer> integerList = new ArrayList<>();
+        for (String stringNumber : stringArray) {
+            Integer integer = Integer.parseInt(stringNumber);
+            integerList.add(integer);
+        }
+        return integerList;
     }
 
 

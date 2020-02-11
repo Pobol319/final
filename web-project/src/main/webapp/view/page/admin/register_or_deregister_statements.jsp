@@ -20,57 +20,59 @@
             <c:if test="${isRegisteredToFaculty eq true}">
                 <h1><fmx:message bundle="${statementsMenuB}" key="head.deregistration"/></h1>
             </c:if>
+
+
+            <form method="get">
+                <div class="table-actions">
+                    <div class="rows">
+                        <table>
+                            <tr>
+                                <th>UserId</th>
+                                <th>UserName</th>
+                                <th>StatementId</th>
+                                <th>StatementDate</th>
+                                <th>Faculty</th>
+                                <th>TotalPoints</th>
+                                <th>checkbox</th>
+                            </tr>
+                            <c:forEach items="${statementDtoList}" var="statementDto" varStatus="status">
+                                <tr>
+                                    <td><c:out value="${statementDto.user.id}"></c:out></td>
+                                    <td><c:out value="${statementDto.user.name}"></c:out></td>
+                                    <td><c:out value="${statementDto.statement.id}"></c:out></td>
+                                    <td><c:out value="${statementDto.statement.date}"></c:out></td>
+                                    <td><c:out value="${statementDto.faculty.name}"></c:out></td>
+                                    <td><c:out value="${statementDto.totalPoints}"></c:out></td>
+                                    <td>
+                                        <p>
+                                            <input type="checkbox" name="statementId"
+                                                   value="${statementDto.statement.id}"/>
+                                        </p>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="confirm-act">
+                    <c:if test="${isRegisteredToFaculty eq false}">
+                        <h2><fmx:message bundle="${statementsMenuB}" key="submit.registration"/></h2>
+                    </c:if>
+                    <c:if test="${isRegisteredToFaculty eq true}">
+                        <h2><fmx:message bundle="${statementsMenuB}" key="submit.deregistration"/></h2>
+                    </c:if>
+                    <p>
+                        <input type="hidden" name="command" value="register_page_confirm_act"/>
+                        <input type="hidden" name="registerOrUnregisterCommand" value="${isRegisteredToFaculty}"/>
+                        <button type="submit">
+                            <fmx:message bundle="${statementsMenuB}" key="button.statements.registration.confirm"/>
+                        </button>
+                    </p>
+                </div>
+            </form>
         </div>
     </div>
-    
-
-    <form method="get">
-        <table width="950" border="0">
-            <tr>
-                <th width="30" height="32" scope="col"></th>
-                <th width="50" scope="col">UserId</th>
-                <th width="60" scope="col">UserName</th>
-                <th width="60" scope="col">StatementId</th>
-                <th width="60" scope="col">StatementDate</th>
-                <th width="60" scope="col">Faculty</th>
-                <th width="60" scope="col">TotalPoints</th>
-            </tr>
-
-            <c:forEach items="${statementDtoList}" var="statementDto" varStatus="status">
-                <tr>
-                    <th height="25" scope="row"></th>
-                    <td><c:out value="${statementDto.user.id}"></c:out></td>
-                    <td><c:out value="${statementDto.user.name}"></c:out></td>
-                    <td><c:out value="${statementDto.statement.id}"></c:out></td>
-                    <td><c:out value="${statementDto.statement.date}"></c:out></td>
-                    <td><c:out value="${statementDto.faculty.name}"></c:out></td>
-                    <td><c:out value="${statementDto.totalPoints}"></c:out></td>
-                    <td>
-                        <p>
-                            <input type="checkbox" name="statementId" value="${statementDto.statement.id}"/>
-                        </p>
-                    </td>
-                </tr>
-            </c:forEach>
-        </table>
-
-        <c:if test="${isRegisteredToFaculty eq false}">
-            <p><fmx:message bundle="${statementsMenuB}" key="submit.registration"/></p>
-        </c:if>
-        <c:if test="${isRegisteredToFaculty eq true}">
-            <p><fmx:message bundle="${statementsMenuB}" key="submit.deregistration"/></p>
-        </c:if>
-
-
-        <p>
-            <input type="hidden" name="command" value="register_page_confirm_act"/>
-            <input type="hidden" name="registerOrUnregisterCommand" value="${isRegisteredToFaculty}"/>
-            <button type="submit">
-                <fmx:message bundle="${statementsMenuB}" key="button.statements.registration.confirm"/>
-            </button>
-        </p>
-    </form>
-
 
     <c:import url="/view/page/general/footer.jsp"/>
 </div>

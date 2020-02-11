@@ -14,25 +14,42 @@ import java.sql.SQLException;
 
 public class ConnectionFactory {
     private static final String DATABASE_PROPERTIES_PATH = "database.properties";
-    private static final String URL_PROPERTY = "dbURL";
+    private static final String URL_PROPERTY = "dbURrl";
     private static final String USER_PROPERTY = "user";
     private static final String PASSWORD_PROPERTY = "password";
+    private static final String MAX_POOL_SIZE_PROPERTY = "maxPoolSize";
 
-    public static ProxyConnection create(ConnectionPool connectionPool) throws ConnectionFactoryException {
+    private static String url;
+    private static String user;
+    private static String password;
+    private static String maxPoolSize;
+
+
+    public static Connection create() throws ConnectionFactoryException {
         Connection connection;
         try {
             Driver driver = new Driver();
             DriverManager.registerDriver(driver);
-
-            PropertyReader propertyReader = new PropertyReader(DATABASE_PROPERTIES_PATH);
-            String url = propertyReader.read(URL_PROPERTY);
-            String user = propertyReader.read(USER_PROPERTY);
-            String password = propertyReader.read(PASSWORD_PROPERTY);
-
             connection = DriverManager.getConnection(url, user, password);
-        } catch (PropertyReaderException| SQLException e){
+        } catch (SQLException e) {
             throw new ConnectionFactoryException("Error with creation of connection", e);
         }
-        return new ProxyConnection(connection, connectionPool);
+        return connection;
+    }
+
+    public static void readProperties() throws ConnectionFactoryException {
+        try {
+            PropertyReader propertyReader = new PropertyReader(DATABASE_PROPERTIES_PATH);
+            url = propertyReader.read(URL_PROPERTY);
+            user = propertyReader.read(USER_PROPERTY);
+            password = propertyReader.read(PASSWORD_PROPERTY);
+            maxPoolSize = propertyReader.read(MAX_POOL_SIZE_PROPERTY);
+        } catch (PropertyReaderException e) {
+            throw new ConnectionFactoryException("Error with creation of connection", e);
+        }
+    }
+
+    public static int getMaxPoolSize() {
+        return Integer.parseInt(maxPoolSize);
     }
 }

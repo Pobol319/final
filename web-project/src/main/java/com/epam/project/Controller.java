@@ -40,24 +40,20 @@ public class Controller extends HttpServlet {
         processRequest(req, resp);
     }
 
-    private void processRequest(HttpServletRequest req, HttpServletResponse resp)
+    private void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = req.getSession();
+        HttpSession session = request.getSession();
         CommandResult commandResult;
         try {
-            String commandName = req.getParameter("command");
-            System.out.println(req.getContextPath());
+            String commandName = request.getParameter("command");
             Command command = CommandFactory.create(commandName);
-            commandResult = command.execute(req, resp);
-        } catch (ServiceException e) {
-            session.setAttribute("errorMessage", e);
-            commandResult = CommandResult.forward(ERROR_PAGE);
+            commandResult = command.execute(request, response);
         } catch (Exception e) {
             session.setAttribute("errorMessage", e);
             commandResult = CommandResult.forward(ERROR_PAGE);
         }
 
-        dispatch(req, resp, commandResult);
+        dispatch(request, response, commandResult);
     }
 
     private void dispatch(HttpServletRequest req, HttpServletResponse resp, CommandResult commandResult

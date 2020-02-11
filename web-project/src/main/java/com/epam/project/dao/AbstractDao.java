@@ -1,6 +1,6 @@
 package com.epam.project.dao;
 
-import com.epam.project.builder.RowMapper;
+import com.epam.project.mapper.RowMapper;
 import com.epam.project.entity.Identifiable;
 import com.epam.project.exceptions.DaoException;
 
@@ -38,7 +38,6 @@ public abstract class AbstractDao<T extends Identifiable> {
         for (int i = 1; i <= params.length; i++) {
             statement.setObject(i, params[i - 1]);
         }
-        System.out.println(statement);
         return statement;
     }
 

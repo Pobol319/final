@@ -2,8 +2,8 @@ package com.epam.project.service.transaction;
 
 import com.epam.project.dao.DaoHelper;
 import com.epam.project.dao.DaoHelperFactory;
-import com.epam.project.dao.interfaces.PointsOnSubjectDao;
-import com.epam.project.dao.interfaces.StatementDao;
+import com.epam.project.dao.api.PointsOnSubjectDao;
+import com.epam.project.dao.api.StatementDao;
 import com.epam.project.entity.PointsOnSubject;
 import com.epam.project.exceptions.ConnectionPoolException;
 import com.epam.project.exceptions.DaoException;
