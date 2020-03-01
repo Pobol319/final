@@ -21,7 +21,7 @@ public class SubjectService {
         try (DaoHelper factory = daoHelperFactory.create()) {
             SubjectDao subjectDao = factory.createSubjectDao();
             return subjectDao.getById(id);
-        } catch (ConnectionPoolException | DaoException e) {
+        } catch ( DaoException e) {
             throw new ServiceException(e);
         }
     }

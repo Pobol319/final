@@ -1,4 +1,3 @@
-com\epam\project\service\transaction\CreateStatementTransactionService.class
 com\epam\project\command\get\ShowStatementCommand.class
 com\epam\project\dao\impl\FacultyDaoImpl.class
 com\epam\project\exceptions\ConnectionFactoryException.class
@@ -24,12 +23,11 @@ com\epam\project\command\get\GetStatementsAccordingToRegistrationToFacultyComman
 com\epam\project\mapper\RequiredSubjectRowMapper.class
 com\epam\project\dao\impl\UserDaoImpl.class
 com\epam\project\entity\Identifiable.class
-com\epam\project\service\transaction\DeleteStatementTransactionService.class
 com\epam\project\property\PropertyReader.class
 com\epam\project\dao\AbstractDao.class
-com\epam\project\____\Main.class
 com\epam\project\exceptions\ServiceException.class
 com\epam\project\entity\FacultyEnum.class
+com\epam\project\command\general\ShowSignInPage.class
 com\epam\project\command\get\ShowListEnrolledApplicants.class
 com\epam\project\dao\impl\StatementDaoImpl.class
 com\epam\project\exceptions\DaoException.class
@@ -51,6 +49,7 @@ com\epam\project\service\FacultyDtoService.class
 com\epam\project\dao\api\PointsOnSubjectDao.class
 com\epam\project\entity\RequiredSubject.class
 com\epam\project\command\Command.class
+com\epam\project\command\general\AccountCreationCommand.class
 com\epam\project\exceptions\ConnectionPoolException.class
 com\epam\project\tag\CongratulationsTag.class
 com\epam\project\entity\UserRoleEnum.class
@@ -64,6 +63,7 @@ com\epam\project\filter\CharsetFilter.class
 com\epam\project\connection\ConnectionPool.class
 com\epam\project\mapper\PointsOnSubjectRowMapper.class
 com\epam\project\dao\DaoHelper.class
+com\epam\project\command\general\ShowRegistrationPage.class
 com\epam\project\dao\api\SubjectDao.class
 com\epam\project\exceptions\PropertyReaderException.class
 com\epam\project\entity\User.class

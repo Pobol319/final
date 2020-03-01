@@ -21,7 +21,7 @@ public class PointsOnSubjectService {
         try (DaoHelper factory = daoHelperFactory.create()) {
             PointsOnSubjectDao pointsOnSubjectDao = factory.createPointsOnSubjectDao();
             return pointsOnSubjectDao.getPointsOnSubjectByStatementId(statementId);
-        } catch (ConnectionPoolException | DaoException e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }

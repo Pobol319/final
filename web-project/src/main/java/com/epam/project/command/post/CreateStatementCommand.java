@@ -6,7 +6,6 @@ import com.epam.project.entity.*;
 import com.epam.project.entity.dto.FacultyDto;
 import com.epam.project.exceptions.ServiceException;
 import com.epam.project.service.*;
-import com.epam.project.service.transaction.CreateStatementTransactionService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -19,18 +18,15 @@ import java.util.List;
 
 public class CreateStatementCommand implements Command {
     private static final Logger LOG = LogManager.getRootLogger();
-    private static final String PAGE = "/view/page/usual/register_to_faculty.jsp";
-    private static final String PAGE_WHEN_USER_HAVE_STATEMENT = "/command?command=register_to_faculty";
+    private static final String PAGE = "/view/page/usual/apply_to_faculty.jsp";
+    private static final String PAGE_WHEN_USER_HAVE_STATEMENT = "/command?command=apply_to_faculty";
 
     private StatementService statementService;
     private FacultyDtoService facultyDtoService;
-    private CreateStatementTransactionService statementTransactionService;
 
-    public CreateStatementCommand(StatementService statementService, FacultyDtoService facultyDtoService,
-                                  CreateStatementTransactionService statementTransactionService) {
+    public CreateStatementCommand(StatementService statementService, FacultyDtoService facultyDtoService) {
         this.statementService = statementService;
         this.facultyDtoService = facultyDtoService;
-        this.statementTransactionService = statementTransactionService;
     }
 
     @Override
@@ -52,7 +48,7 @@ public class CreateStatementCommand implements Command {
         }
 
         FacultyDto facultyDto = facultyDtoService.getFacultyDtoInfo(facultyIdInt);
-        statementTransactionService.createStatementAndPointsOnSubjects(user,facultyDto,pointsIntegerList);
+        statementService.createStatementAndPointsOnSubjects(user,facultyDto,pointsIntegerList);
 
         return CommandResult.redirect(PAGE);
     }

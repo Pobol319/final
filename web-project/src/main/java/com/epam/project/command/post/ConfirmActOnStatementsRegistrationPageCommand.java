@@ -9,13 +9,12 @@ import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ConfirmActOnStatementsRegistrationPageCommand implements Command {
     private static final Logger LOG = LogManager.getRootLogger();
-    private static final String PAGE = "/view/page/admin/register_or_deregister_statements.jsp";
+    private static final String PAGE = "/view/page/usual/register_or_deregister_statements.jsp";
     private static final String PAGE_REGISTRATION = "/command?command=register_or_deregister_statements&registerOrDeregisterCommand=register";
     private static final String PAGE_DEREGISTRATION = "/command?command=register_or_deregister_statements&registerOrDeregisterCommand=deregister";
 
@@ -35,15 +34,15 @@ public class ConfirmActOnStatementsRegistrationPageCommand implements Command {
         String[] statementsIdStringArray;
         List<Integer> statementsIdIntegerList;
 
-        try {
-            statementsIdStringArray = request.getParameterValues("statementId");
-            statementsIdIntegerList = convertStringArrayToIntegerList(statementsIdStringArray);
-        } catch (NullPointerException e) {
+        if (request.getParameter("statementId") == null) {
             if (registerOrDeregisterCommandStringBoolean) {
                 return CommandResult.redirect(PAGE_REGISTRATION);
             } else {
                 return CommandResult.redirect(PAGE_DEREGISTRATION);
             }
+        } else {
+            statementsIdStringArray = request.getParameterValues("statementId");
+            statementsIdIntegerList = convertStringArrayToIntegerList(statementsIdStringArray);
         }
 
         for (Integer statementId : statementsIdIntegerList) {

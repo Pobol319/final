@@ -10,4 +10,5 @@ public interface StatementDao extends Dao<Statement> {
     Optional<Statement> findStatementByUserId(Integer userId) throws DaoException;
     List<Statement> getStatementsAccordingToRegistrationToFaculty(boolean isRegistered) throws DaoException;
     void updateStatementRegistrationByStatementId(Integer statementId, boolean isWorthRegisterToFaculty) throws DaoException;
+    Optional<Integer> saveAndReturnGeneratedKey(Statement item) throws DaoException;
 }

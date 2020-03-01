@@ -5,8 +5,8 @@ import com.epam.project.exceptions.ConnectionFactoryException;
 import com.epam.project.exceptions.ConnectionPoolException;
 
 
-public class DaoHelperFactory  {
-    public DaoHelper create() throws ConnectionPoolException {
+public class DaoHelperFactory {
+    public DaoHelper create() {
         return new DaoHelper(ConnectionPool.getInstance());
     }
 }

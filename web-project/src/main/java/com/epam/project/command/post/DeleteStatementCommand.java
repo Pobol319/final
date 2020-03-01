@@ -3,7 +3,7 @@ package com.epam.project.command.post;
 import com.epam.project.command.Command;
 import com.epam.project.command.CommandResult;
 import com.epam.project.exceptions.ServiceException;
-import com.epam.project.service.transaction.DeleteStatementTransactionService;
+import com.epam.project.service.StatementService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -15,10 +15,10 @@ public class DeleteStatementCommand implements Command {
     private static final Logger LOG = LogManager.getRootLogger();
     private static final String PAGE = "/view/page/usual/look_and_delete_statement.jsp";
 
-    private DeleteStatementTransactionService statementTransactionService;
+    private StatementService statementService;
 
-    public DeleteStatementCommand(DeleteStatementTransactionService statementTransactionService) {
-        this.statementTransactionService = statementTransactionService;
+    public DeleteStatementCommand(StatementService statementService) {
+        this.statementService = statementService;
     }
 
     @Override
@@ -27,7 +27,7 @@ public class DeleteStatementCommand implements Command {
 
         String statementIdString = request.getParameter("statementId");
         Integer statementIdInteger = Integer.parseInt(statementIdString);
-        statementTransactionService.deleteStatementAndPointsOnSubjects(statementIdInteger);
+        statementService.deleteStatementAndPointsOnSubjects(statementIdInteger);
 
         return CommandResult.redirect(PAGE);
     }

@@ -20,7 +20,7 @@ import java.util.Optional;
 
 public class GetRequiredSubjectsCommand implements Command {
     private static final Logger LOG = LogManager.getRootLogger();
-    private static final String PAGE = "/command?command=register_to_faculty";
+    private static final String PAGE = "/command?command=apply_to_faculty";
 
     private FacultyDtoService facultyDtoService;
 

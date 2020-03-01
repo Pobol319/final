@@ -22,7 +22,7 @@ public class FacultyService {
         try (DaoHelper factory = daoHelperFactory.create()) {
             FacultyDao facultyDao = factory.createFacultyDao();
             return facultyDao.getAll();
-        } catch (ConnectionPoolException | DaoException e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -31,7 +31,7 @@ public class FacultyService {
         try (DaoHelper factory = daoHelperFactory.create()) {
             FacultyDao facultyDao = factory.createFacultyDao();
             return facultyDao.getById(id);
-        } catch (ConnectionPoolException | DaoException e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }

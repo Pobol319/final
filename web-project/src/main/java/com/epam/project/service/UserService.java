@@ -4,6 +4,7 @@ import com.epam.project.dao.DaoHelper;
 import com.epam.project.dao.DaoHelperFactory;
 import com.epam.project.dao.api.UserDao;
 import com.epam.project.entity.User;
+import com.epam.project.entity.UserRoleEnum;
 import com.epam.project.exceptions.ConnectionPoolException;
 import com.epam.project.exceptions.DaoException;
 import com.epam.project.exceptions.ServiceException;
@@ -22,7 +23,7 @@ public class UserService {
         try (DaoHelper factory = daoHelperFactory.create()) {
             UserDao userDao = factory.createUserDao();
             return userDao.findUserByLoginAndPassword(login, password);
-        } catch (ConnectionPoolException | DaoException e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -31,7 +32,32 @@ public class UserService {
         try (DaoHelper factory = daoHelperFactory.create()) {
             UserDao userDao = factory.createUserDao();
             return userDao.getById(userId);
-        } catch (ConnectionPoolException | DaoException e) {
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    public boolean isLoginUnique(String login) throws ServiceException {
+        try (DaoHelper factory = daoHelperFactory.create()) {
+            UserDao userDao = factory.createUserDao();
+            Optional<User> user = userDao.findByLogin(login);
+            return !user.isPresent();
+        } catch (DaoException e) {
+            throw new ServiceException(e);
+        }
+    }
+
+    public void save(String firstName, String secondName, String login, String password, UserRoleEnum role) throws ServiceException {
+        try (DaoHelper factory = daoHelperFactory.create()) {
+            UserDao userDao = factory.createUserDao();
+            User user = new User();
+            user.setFirstName(firstName);
+            user.setSecondName(secondName);
+            user.setLogin(login);
+            user.setPassword(password);
+            user.setRole(role);
+            userDao.save(user);
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }

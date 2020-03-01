@@ -4,10 +4,7 @@ import com.epam.project.mapper.RowMapper;
 import com.epam.project.entity.Identifiable;
 import com.epam.project.exceptions.DaoException;
 
-import java.sql.ResultSet;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -58,23 +55,34 @@ public abstract class AbstractDao<T extends Identifiable> {
         }
     }
 
-    protected Optional<T> executeForSingleResultWithoutParameters(String query, RowMapper<T> builder) throws DaoException {
-        List<T> items = executeQuery(query, builder);
-        if (items.size() == 1) {
-            return Optional.of(items.get(0));
-        } else if (items.size() > 1) {
-            throw new IllegalArgumentException("More than one record found");
-        } else {
-            return Optional.empty();
-        }
-    }
-
     protected void updateTable(String query, Object... params) throws DaoException {
         try (PreparedStatement statement = createStatement(query, params)) {
             statement.executeUpdate();
         } catch (SQLException e) {
             throw new DaoException(e);
         }
+    }
+
+    protected Optional<Integer> updateTableWithGeneratedKeys(String query, Object... params) throws DaoException {
+        try (PreparedStatement statement = createStatementWithGeneratedKeys(query, params)) {
+            statement.executeUpdate();
+            ResultSet resultSet = statement.getGeneratedKeys();
+            if (resultSet.next()) {
+                return Optional.of(resultSet.getInt(1));
+            } else {
+                return Optional.empty();
+            }
+        } catch (SQLException e) {
+            throw new DaoException(e);
+        }
+    }
+
+    private PreparedStatement createStatementWithGeneratedKeys(String query, Object... params) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement(query, PreparedStatement.RETURN_GENERATED_KEYS);
+        for (int i = 1; i <= params.length; i++) {
+            statement.setObject(i, params[i - 1]);
+        }
+        return statement;
     }
 
     protected abstract String getTableName();

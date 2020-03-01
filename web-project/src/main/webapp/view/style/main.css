@@ -55,7 +55,7 @@ body {
 }
 
 .sign-in button {
-    width: 50px;
+    width: 65px;
     padding: 6px 0;
     background-color: white;
     border: 1px solid black;
@@ -77,9 +77,9 @@ body {
 
 .rows {
     height: 55%;
-    width: 35.58%;
+    width: 43.1%;
     overflow: auto;
-    left: 37%;
+    left: 34%;
     position: absolute;
 }
 
@@ -434,4 +434,8 @@ form {
     border-radius: 10px;
     background-color: #21805c;
     border: 1px solid white;
+}
+
+.buttons{
+    display: inline-block;
 }

@@ -12,7 +12,7 @@ import java.sql.SQLException;
 public class DaoHelper implements AutoCloseable {
     private ProxyConnection connection;
 
-    public DaoHelper(ConnectionPool pool) throws ConnectionPoolException {
+    public DaoHelper(ConnectionPool pool) {
         this.connection = pool.getConnection();
     }
 

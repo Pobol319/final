@@ -1,6 +1,6 @@
 package com.epam.project.exceptions;
 
-public class ConnectionPoolException extends Exception {
+public class ConnectionPoolException extends RuntimeException {
     public ConnectionPoolException(Throwable cause) {
         super(cause);
     }

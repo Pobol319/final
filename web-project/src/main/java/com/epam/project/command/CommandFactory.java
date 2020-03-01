@@ -1,16 +1,12 @@
 package com.epam.project.command;
 
-import com.epam.project.command.general.AuthorizeCommand;
-import com.epam.project.command.general.ChooseLanguageCommand;
-import com.epam.project.command.general.LogoutCommand;
+import com.epam.project.command.general.*;
 import com.epam.project.command.get.*;
 import com.epam.project.command.post.ConfirmActOnStatementsRegistrationPageCommand;
 import com.epam.project.command.post.CreateStatementCommand;
 import com.epam.project.command.post.DeleteStatementCommand;
 import com.epam.project.dao.DaoHelperFactory;
 import com.epam.project.service.*;
-import com.epam.project.service.transaction.CreateStatementTransactionService;
-import com.epam.project.service.transaction.DeleteStatementTransactionService;
 
 public class CommandFactory {
 
@@ -18,7 +14,13 @@ public class CommandFactory {
         switch (command) {
             case "authorize":
                 return new AuthorizeCommand(new UserService(new DaoHelperFactory()));
-            case "register_to_faculty":
+            case "sign_up":
+                return new ShowRegistrationPage();
+            case "sign_in":
+                return new ShowSignInPage();
+            case "create_account":
+                return new AccountCreationCommand(new UserService(new DaoHelperFactory()));
+            case "apply_to_faculty":
                 return new GetAllFacultiesCommand(new FacultyService(new DaoHelperFactory()));
             case "get_required_subjects":
                 return new GetRequiredSubjectsCommand(
@@ -32,8 +34,7 @@ public class CommandFactory {
                         new FacultyDtoService(
                                 new FacultyService(new DaoHelperFactory()),
                                 new RequiredSubjectService(new DaoHelperFactory()),
-                                new SubjectService(new DaoHelperFactory())),
-                        new CreateStatementTransactionService(new DaoHelperFactory()));
+                                new SubjectService(new DaoHelperFactory())));
             case "look_statement":
                 return new ShowStatementCommand(
                         new StatementDtoService(
@@ -43,7 +44,7 @@ public class CommandFactory {
                                 new PointsOnSubjectService(new DaoHelperFactory()),
                                 new SubjectService(new DaoHelperFactory())));
             case "delete_statement":
-                return new DeleteStatementCommand(new DeleteStatementTransactionService(new DaoHelperFactory()));
+                return new DeleteStatementCommand(new StatementService(new DaoHelperFactory()));
             case "register_or_deregister_statements":
                 return new GetStatementsAccordingToRegistrationToFacultyCommand(
                         new StatementDtoService(

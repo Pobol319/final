@@ -1,6 +1,6 @@
 package com.epam.project.exceptions;
 
-public class ConnectionFactoryException extends Exception {
+public class ConnectionFactoryException extends RuntimeException {
     public ConnectionFactoryException(Throwable cause) {
         super(cause);
     }

@@ -16,7 +16,7 @@ import java.util.List;
 public class GetAllFacultiesCommand implements Command {
     private static final Logger LOG = LogManager.getRootLogger();
 
-    private static final String PAGE = "/view/page/usual/register_to_faculty.jsp";
+    private static final String PAGE = "/view/page/usual/apply_to_faculty.jsp";
     private FacultyService service;
 
     public GetAllFacultiesCommand(FacultyService service) {

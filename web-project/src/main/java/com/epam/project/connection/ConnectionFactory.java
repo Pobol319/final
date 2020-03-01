@@ -17,15 +17,23 @@ public class ConnectionFactory {
     private static final String URL_PROPERTY = "dbURrl";
     private static final String USER_PROPERTY = "user";
     private static final String PASSWORD_PROPERTY = "password";
-    private static final String MAX_POOL_SIZE_PROPERTY = "maxPoolSize";
 
     private static String url;
     private static String user;
     private static String password;
-    private static String maxPoolSize;
 
+    ConnectionFactory() {
+        try {
+            PropertyReader propertyReader = new PropertyReader(DATABASE_PROPERTIES_PATH);
+            url = propertyReader.read(URL_PROPERTY);
+            user = propertyReader.read(USER_PROPERTY);
+            password = propertyReader.read(PASSWORD_PROPERTY);
+        } catch (PropertyReaderException e) {
+            throw new ConnectionFactoryException("Error with creation of connection", e);
+        }
+    }
 
-    public static Connection create() throws ConnectionFactoryException {
+    public Connection create() {
         Connection connection;
         try {
             Driver driver = new Driver();
@@ -37,19 +45,4 @@ public class ConnectionFactory {
         return connection;
     }
 
-    public static void readProperties() throws ConnectionFactoryException {
-        try {
-            PropertyReader propertyReader = new PropertyReader(DATABASE_PROPERTIES_PATH);
-            url = propertyReader.read(URL_PROPERTY);
-            user = propertyReader.read(USER_PROPERTY);
-            password = propertyReader.read(PASSWORD_PROPERTY);
-            maxPoolSize = propertyReader.read(MAX_POOL_SIZE_PROPERTY);
-        } catch (PropertyReaderException e) {
-            throw new ConnectionFactoryException("Error with creation of connection", e);
-        }
-    }
-
-    public static int getMaxPoolSize() {
-        return Integer.parseInt(maxPoolSize);
-    }
 }

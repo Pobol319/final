@@ -7,7 +7,6 @@ import com.epam.project.entity.dto.StatementDto;
 import com.epam.project.exceptions.ServiceException;
 import com.epam.project.service.FacultyService;
 import com.epam.project.service.StatementDtoService;
-import sun.jvm.hotspot.debugger.Page;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ShowListEnrolledApplicants implements Command {
-    private static final String PAGE = "/view/page/admin/enroll_applicants.jsp";
+    private static final String PAGE = "/view/page/usual/enroll_applicants.jsp";
 
     private StatementDtoService statementDtoService;
     private FacultyService facultyService;

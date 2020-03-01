@@ -6,7 +6,7 @@ import com.epam.project.exceptions.ConnectionPoolException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.IOException;
+import java.sql.Connection;
 import java.util.ArrayDeque;
 import java.util.Queue;
 import java.util.concurrent.Semaphore;
@@ -17,7 +17,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class ConnectionPool {
     private static final Logger LOG = LogManager.getLogger(ConnectionPool.class);
 
-    private static int MAX_POOL_SIZE;
+    private static int MAX_POOL_SIZE = 13;
     private Semaphore semaphore = new Semaphore(MAX_POOL_SIZE);
     private static final AtomicReference<ConnectionPool> instance = new AtomicReference<>();
 
@@ -33,24 +33,24 @@ public class ConnectionPool {
     }
 
     private void createPool() {
+        ConnectionFactory factory = new ConnectionFactory();
         for (int i = 0; i < MAX_POOL_SIZE; i++) {
             try {
-                ProxyConnection connection = new ProxyConnection(ConnectionFactory.create(), this);
-                availableConnections.add(connection);
+                Connection connection = factory.create();
+                ProxyConnection proxyConnection = new ProxyConnection(connection, this);
+                availableConnections.add(proxyConnection);
             } catch (ConnectionFactoryException e) {
                 LOG.error("Error with creation of connection", e);
             }
         }
     }
 
-    public static ConnectionPool getInstance() throws ConnectionPoolException {
+    public static ConnectionPool getInstance() {
         Lock lock = new ReentrantLock();
         if (instance.get() == null) {
             lock.lock();
             try {
                 try {
-                    ConnectionFactory.readProperties();
-                    MAX_POOL_SIZE = ConnectionFactory.getMaxPoolSize();
                     instance.compareAndSet(null, new ConnectionPool());
                 } catch (ConnectionFactoryException e) {
                     throw new ConnectionPoolException("Problems with ConnectionPool", e);
@@ -75,7 +75,7 @@ public class ConnectionPool {
         }
     }
 
-    public ProxyConnection getConnection() throws ConnectionPoolException {
+    public ProxyConnection getConnection() {
         ProxyConnection proxyConnection;
         try {
             semaphore.acquire();

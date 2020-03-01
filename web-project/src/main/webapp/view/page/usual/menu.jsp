@@ -15,7 +15,7 @@
         <c:import url="/view/page/general/top_panel.jsp"/>
         <c:import url="/view/page/usual/left_panel.jsp"/>
         <div class="inner-content">
-            <h1><fmx:message bundle="${menuB}" key="head"/>, ${user.name}!</h1>
+            <h1><fmx:message bundle="${menuB}" key="head"/>, ${user.secondName} ${user.firstName}!</h1>
         </div>
     </div>
     <c:import url="/view/page/general/footer.jsp"/>

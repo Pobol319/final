@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmx" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<fmx:setBundle basename="locale.admin.register_or_deregister_statements" var="statementsMenuB"/>
+<fmx:setBundle basename="locale.usual.register_or_deregister_statements" var="statementsMenuB"/>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
@@ -27,20 +27,21 @@
                     <div class="rows">
                         <table>
                             <tr>
-                                <th>UserId</th>
-                                <th>UserName</th>
-                                <th>StatementId</th>
-                                <th>StatementDate</th>
-                                <th>Faculty</th>
-                                <th>TotalPoints</th>
-                                <th>checkbox</th>
+                                <th>№</th>
+                                <th><fmx:message bundle="${statementsMenuB}" key="user.secondName"/></th>
+                                <th><fmx:message bundle="${statementsMenuB}" key="user.firstName"/></th>
+                                <th><fmx:message bundle="${statementsMenuB}" key="statement.date"/></th>
+                                <th><fmx:message bundle="${statementsMenuB}" key="faculty.name"/></th>
+                                <th><fmx:message bundle="${statementsMenuB}" key="totalPoints"/></th>
+                                <th><fmx:message bundle="${statementsMenuB}" key="checkbox"/></th>
                             </tr>
-                            <c:forEach items="${statementDtoList}" var="statementDto" varStatus="status">
+                            <c:forEach items="${statementDtoList}" var="statementDto" varStatus="i">
                                 <tr>
-                                    <td><c:out value="${statementDto.user.id}"></c:out></td>
-                                    <td><c:out value="${statementDto.user.name}"></c:out></td>
-                                    <td><c:out value="${statementDto.statement.id}"></c:out></td>
-                                    <td><c:out value="${statementDto.statement.date}"></c:out></td>
+                                    <td><c:out value="${i.count}"/></td>
+                                    <td><c:out value="${statementDto.user.secondName}"></c:out></td>
+                                    <td><c:out value="${statementDto.user.firstName}"></c:out></td>
+                                    <td><fmx:formatDate value="${statementDto.statement.date}" type="date"
+                                                        pattern="dd.MM.yyyy"/>
                                     <td><c:out value="${statementDto.faculty.name}"></c:out></td>
                                     <td><c:out value="${statementDto.totalPoints}"></c:out></td>
                                     <td>

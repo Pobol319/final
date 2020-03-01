@@ -1,5 +1,4 @@
 C:\Users\Pavel\IdeaProjects\final\web-project\src\main\java\com\epam\project\service\PointsOnSubjectService.java
-C:\Users\Pavel\IdeaProjects\final\web-project\src\main\java\com\epam\project\service\transaction\DeleteStatementTransactionService.java
 C:\Users\Pavel\IdeaProjects\final\web-project\src\main\java\com\epam\project\entity\Identifiable.java
 C:\Users\Pavel\IdeaProjects\final\web-project\src\main\java\com\epam\project\service\RequiredSubjectService.java
 C:\Users\Pavel\IdeaProjects\final\web-project\src\main\java\com\epam\project\service\StatementDtoService.java
@@ -10,7 +9,7 @@ C:\Users\Pavel\IdeaProjects\final\web-project\src\main\java\com\epam\project\ser
 C:\Users\Pavel\IdeaProjects\final\web-project\src\main\java\com\epam\project\entity\User.java
 C:\Users\Pavel\IdeaProjects\final\web-project\src\main\java\com\epam\project\mapper\RequiredSubjectRowMapper.java
 C:\Users\Pavel\IdeaProjects\final\web-project\src\main\java\com\epam\project\dao\impl\SubjectDaoImpl.java
-C:\Users\Pavel\IdeaProjects\final\web-project\src\main\java\com\epam\project\____\Main.java
+C:\Users\Pavel\IdeaProjects\final\web-project\src\main\java\com\epam\project\command\general\ShowRegistrationPage.java
 C:\Users\Pavel\IdeaProjects\final\web-project\src\main\java\com\epam\project\mapper\StatementRowMapper.java
 C:\Users\Pavel\IdeaProjects\final\web-project\src\main\java\com\epam\project\dao\api\Dao.java
 C:\Users\Pavel\IdeaProjects\final\web-project\src\main\java\com\epam\project\entity\FacultyEnum.java
@@ -26,6 +25,7 @@ C:\Users\Pavel\IdeaProjects\final\web-project\src\main\java\com\epam\project\ser
 C:\Users\Pavel\IdeaProjects\final\web-project\src\main\java\com\epam\project\page\Language.java
 C:\Users\Pavel\IdeaProjects\final\web-project\src\main\java\com\epam\project\command\post\CreateStatementCommand.java
 C:\Users\Pavel\IdeaProjects\final\web-project\src\main\java\com\epam\project\dao\api\SubjectDao.java
+C:\Users\Pavel\IdeaProjects\final\web-project\src\main\java\com\epam\project\command\general\ShowSignInPage.java
 C:\Users\Pavel\IdeaProjects\final\web-project\src\main\java\com\epam\project\connection\ProxyConnection.java
 C:\Users\Pavel\IdeaProjects\final\web-project\src\main\java\com\epam\project\entity\dto\StatementDto.java
 C:\Users\Pavel\IdeaProjects\final\web-project\src\main\java\com\epam\project\command\CommandFactory.java
@@ -39,7 +39,6 @@ C:\Users\Pavel\IdeaProjects\final\web-project\src\main\java\com\epam\project\com
 C:\Users\Pavel\IdeaProjects\final\web-project\src\main\java\com\epam\project\command\get\ShowListEnrolledApplicants.java
 C:\Users\Pavel\IdeaProjects\final\web-project\src\main\java\com\epam\project\mapper\FacultyRowMapper.java
 C:\Users\Pavel\IdeaProjects\final\web-project\src\main\java\com\epam\project\entity\dto\FacultyDto.java
-C:\Users\Pavel\IdeaProjects\final\web-project\src\main\java\com\epam\project\service\transaction\CreateStatementTransactionService.java
 C:\Users\Pavel\IdeaProjects\final\web-project\src\main\java\com\epam\project\tag\CongratulationsTag.java
 C:\Users\Pavel\IdeaProjects\final\web-project\src\main\java\com\epam\project\mapper\SubjectRowMapper.java
 C:\Users\Pavel\IdeaProjects\final\web-project\src\main\java\com\epam\project\dao\api\UserDao.java
@@ -54,6 +53,7 @@ C:\Users\Pavel\IdeaProjects\final\web-project\src\main\java\com\epam\project\ser
 C:\Users\Pavel\IdeaProjects\final\web-project\src\main\java\com\epam\project\entity\PointsOnSubject.java
 C:\Users\Pavel\IdeaProjects\final\web-project\src\main\java\com\epam\project\filter\CharsetFilter.java
 C:\Users\Pavel\IdeaProjects\final\web-project\src\main\java\com\epam\project\dao\impl\StatementDaoImpl.java
+C:\Users\Pavel\IdeaProjects\final\web-project\src\main\java\com\epam\project\command\general\AccountCreationCommand.java
 C:\Users\Pavel\IdeaProjects\final\web-project\src\main\java\com\epam\project\command\post\ConfirmActOnStatementsRegistrationPageCommand.java
 C:\Users\Pavel\IdeaProjects\final\web-project\src\main\java\com\epam\project\dao\api\FacultyDao.java
 C:\Users\Pavel\IdeaProjects\final\web-project\src\main\java\com\epam\project\service\SubjectService.java

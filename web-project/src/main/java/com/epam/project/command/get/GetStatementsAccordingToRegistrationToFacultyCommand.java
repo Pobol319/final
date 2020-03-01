@@ -20,7 +20,7 @@ import java.util.List;
 
 public class GetStatementsAccordingToRegistrationToFacultyCommand implements Command {
     private static final Logger LOG = LogManager.getRootLogger();
-    private static final String PAGE = "/view/page/admin/register_or_deregister_statements.jsp";
+    private static final String PAGE = "/view/page/usual/register_or_deregister_statements.jsp";
 
    private StatementDtoService statementDtoService;
 

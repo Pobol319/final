@@ -1,25 +1,29 @@
 package com.epam.project.entity;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 public class User implements Identifiable {
     public static final String TABLE = "users";
     public static final String ID_COLUMN = "user_id";
-    public static final String NAME_COLUMN = "name";
+    public static final String FIRST_NAME_COLUMN = "first_name";
+    public static final String SECOND_NAME_COLUMN = "second_name";
     public static final String LOGIN_COLUMN = "login";
     public static final String PASSWORD_COLUMN = "password";
     public static final String ROLE_COLUMN = "role";
 
     private Integer id;
-    private String name;
+    private String firstName;
+    private String secondName;
     private String login;
     private String password;
     private UserRoleEnum role;
 
-    public User(Integer id, String name, String login, String password, UserRoleEnum role) {
+    public User(){}
+
+    public User(Integer id, String firstName, String secondName, String login, String password, UserRoleEnum role) {
         this.id = id;
-        this.name = name;
+        this.firstName = firstName;
+        this.secondName = secondName;
         this.login = login;
         this.password = password;
         this.role = role;
@@ -30,12 +34,20 @@ public class User implements Identifiable {
         return id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getSecondName() {
+        return secondName;
+    }
+
+    public void setSecondName(String secondName) {
+        this.secondName = secondName;
     }
 
     public String getLogin() {
@@ -62,50 +74,31 @@ public class User implements Identifiable {
         this.role = role;
     }
 
+
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if ((!(o instanceof User))) {
-            return false;
-        }
-        if (!super.equals(o)) {
-            return false;
-        }
-
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
         User user = (User) o;
-
-        if (!id.equals(user.id)) {
-            return false;
-        }
-        if (!name.equals(user.name)) {
-            return false;
-        }
-        if (!login.equals(user.login)) {
-            return false;
-        }
-        if (!password.equals(user.password)) {
-            return false;
-        }
-        return role.equals(user.role);
+        return id.equals(user.id) &&
+                firstName.equals(user.firstName) &&
+                secondName.equals(user.secondName) &&
+                login.equals(user.login) &&
+                password.equals(user.password) &&
+                role == user.role;
     }
 
     @Override
     public int hashCode() {
-        int result = 31 * id;
-        result = 31 * result + name.hashCode();
-        result = 31 * result + login.hashCode();
-        result = 31 * result + password.hashCode();
-        result = 31 * result + role.hashCode();
-        return result;
+        return Objects.hash(id, firstName, secondName, login, password, role);
     }
 
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", first name='" + firstName + '\'' +
+                ", second name='" + secondName + '\'' +
                 ", login='" + login + '\'' +
                 ", password='" + password + '\'' +
                 ", role=" + role +

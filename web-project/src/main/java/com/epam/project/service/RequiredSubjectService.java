@@ -21,7 +21,7 @@ public class RequiredSubjectService {
         try (DaoHelper factory = daoHelperFactory.create()) {
             RequiredSubjectDao requiredSubjectDao = factory.createRequiredSubjectDao();
             return requiredSubjectDao.findSubjectIdByFacultyId(facultyId);
-        } catch (ConnectionPoolException | DaoException e) {
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }

@@ -23,7 +23,9 @@
                         <h3><fmx:message bundle="${lookStatementB}" key="statement"/> #${statementDto.statement.id}</h3>
                         <h3><fmx:message bundle="${lookStatementB}" key="faculty"/> - ${statementDto.faculty.name}</h3>
                         <h3><fmx:message bundle="${lookStatementB}"
-                                         key="statementDate"/>: ${statementDto.statement.date}</h3>
+                                         key="statementDate"/>: <fmx:formatDate value="${statementDto.statement.date}"
+                                                                                type="date"
+                                                                                pattern="dd.MM.yyyy"/></h3>
                     </div>
                     <table>
                         <tr>

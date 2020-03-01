@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmx" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<fmx:setBundle basename="locale.usual.register_to_faculty" var="facultiesMenuB"/>
+<fmx:setBundle basename="locale.usual.apply_to_faculty" var="facultiesMenuB"/>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
@@ -23,7 +23,7 @@
                 <h1><fmx:message bundle="${facultiesMenuB}" key="head"/></h1>
                 <c:forEach items="${allFaculties}" var="faculty">
                     <div class="entity">
-                        <h3><fmx:message bundle="${facultiesMenuB}" key="faculty.name"/> - ${faculty.name}</h3>
+                        <h3><fmx:message bundle="${facultiesMenuB}" key="faculty.${faculty.name}"/> (${faculty.name})</h3>
                         <p><fmx:message bundle="${facultiesMenuB}" key="faculty.maxSize"/> - ${faculty.maxSize}</p>
                     </div>
                 </c:forEach>
@@ -40,7 +40,6 @@
                             <fmx:message bundle="${facultiesMenuB}" key="faculty.get.subjects"/>
                         </button>
                     </form>
-
                     <c:if test="${selectedFacultyId ne null}">
                         <form method="post" action="<c:url value="/command"/>">
                             <input type="hidden" name="command" value="create_statement"/>
@@ -55,11 +54,9 @@
                             </button>
                         </form>
                     </c:if>
-
                     <c:if test="${userHaveStatement eq true}">
                         <fmx:message bundle="${facultiesMenuB}" key="faculty.user.have.statement"/>
                     </c:if>
-
                 </div>
             </div>
         </c:if>
