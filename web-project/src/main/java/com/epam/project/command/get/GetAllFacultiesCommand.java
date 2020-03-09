@@ -14,8 +14,6 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public class GetAllFacultiesCommand implements Command {
-    private static final Logger LOG = LogManager.getRootLogger();
-
     private static final String PAGE = "/view/page/usual/apply_to_faculty.jsp";
     private FacultyService service;
 
@@ -25,8 +23,6 @@ public class GetAllFacultiesCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        LOG.info("GetAllFacultiesCommand - done");
-
         List<Faculty> allFaculties;
         allFaculties = service.getAllFaculties();
         request.setAttribute("allFaculties", allFaculties);

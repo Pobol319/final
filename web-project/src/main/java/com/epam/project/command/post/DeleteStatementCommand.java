@@ -12,9 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 
 public class DeleteStatementCommand implements Command {
-    private static final Logger LOG = LogManager.getRootLogger();
     private static final String PAGE = "/view/page/usual/look_and_delete_statement.jsp";
-
     private StatementService statementService;
 
     public DeleteStatementCommand(StatementService statementService) {
@@ -23,8 +21,6 @@ public class DeleteStatementCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        LOG.info("DeleteStatementCommand - done ");
-
         String statementIdString = request.getParameter("statementId");
         Integer statementIdInteger = Integer.parseInt(statementIdString);
         statementService.deleteStatementAndPointsOnSubjects(statementIdInteger);

@@ -16,8 +16,6 @@ import java.util.Optional;
 
 
 public class AuthorizeCommand implements Command {
-    private static final Logger LOG = LogManager.getRootLogger();
-
     private static final String PAGE = "/view/page/usual/menu.jsp";
     private static final String AUTHORIZE_ERROR_PAGE = "/view/page/error/error_authorization.jsp";
     private UserService service;
@@ -28,8 +26,6 @@ public class AuthorizeCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        LOG.info("AuthorizeCommand - done ");
-
         HttpSession session = request.getSession();
         String login = request.getParameter("login");
         String password = request.getParameter("password");

@@ -60,9 +60,7 @@ public class Faculty implements Identifiable {
         if (!super.equals(o)) {
             return false;
         }
-
         Faculty faculty = (Faculty) o;
-
         if (!id.equals(faculty.id)) {
             return false;
         }

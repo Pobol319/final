@@ -15,7 +15,6 @@ public class PropertyReader {
 
     public String read(String propertyName) throws PropertyReaderException {
         String propertyValue;
-
         try (InputStream stream = getClass().getClassLoader().getResourceAsStream(filePath)) {
             Properties properties = new Properties();
             properties.load(stream);

@@ -1,5 +1,7 @@
 package com.epam.project.entity;
 
+import java.util.Objects;
+
 public class RequiredSubject implements Identifiable {
     public static final String TABLE = "required_subjects";
     public static final String ID_COLUMN = "required_subject_id";
@@ -35,6 +37,21 @@ public class RequiredSubject implements Identifiable {
 
     public void setFacultyId(Integer facultyId) {
         this.facultyId = facultyId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof RequiredSubject)) return false;
+        RequiredSubject that = (RequiredSubject) o;
+        return id.equals(that.id) &&
+                facultyId.equals(that.facultyId) &&
+                subjectId.equals(that.subjectId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, facultyId, subjectId);
     }
 
     @Override

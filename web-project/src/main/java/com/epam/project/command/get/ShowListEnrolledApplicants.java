@@ -15,7 +15,6 @@ import java.util.Map;
 
 public class ShowListEnrolledApplicants implements Command {
     private static final String PAGE = "/view/page/usual/enroll_applicants.jsp";
-
     private StatementDtoService statementDtoService;
     private FacultyService facultyService;
 
@@ -26,12 +25,10 @@ public class ShowListEnrolledApplicants implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-
         List<StatementDto> statementDtoList = statementDtoService.getStatementDtoAccordingToRegistration(true);
         List<Faculty> faculties = facultyService.getAllFaculties();
         Map<Faculty, List<StatementDto>> enrolledApplicants = statementDtoService.getEnrolledStatementDtoListAccordingToFaculty(faculties,
                 statementDtoList);
-
         request.setAttribute("mapFaculty", enrolledApplicants);
 
         return CommandResult.forward(PAGE);

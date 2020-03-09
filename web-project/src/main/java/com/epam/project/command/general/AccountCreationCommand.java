@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 public class AccountCreationCommand implements Command {
     private static final String PAGE = "/view/page/general/registration.jsp";
-
     private UserService userService;
 
     public AccountCreationCommand(UserService userService) {
@@ -32,6 +31,6 @@ public class AccountCreationCommand implements Command {
         userService.save(firstName, secondName, login, password, UserRoleEnum.USER);
 
         request.setAttribute("answerForRegistration", true);
-        return CommandResult.forward(PAGE);
+        return CommandResult.redirect(PAGE);
     }
 }

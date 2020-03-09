@@ -19,7 +19,6 @@ import java.util.List;
 
 
 public class GetStatementsAccordingToRegistrationToFacultyCommand implements Command {
-    private static final Logger LOG = LogManager.getRootLogger();
     private static final String PAGE = "/view/page/usual/register_or_deregister_statements.jsp";
 
    private StatementDtoService statementDtoService;
@@ -30,8 +29,6 @@ public class GetStatementsAccordingToRegistrationToFacultyCommand implements Com
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        LOG.info("GetStatementsAccordingToRegistrationToFacultyCommand - done ");
-
         String typeOfCommand = request.getParameter("registerOrDeregisterCommand");
         boolean isRegisteredToFaculty = !typeOfCommand.equals("register");
         List<StatementDto> statementDtoList = statementDtoService.getStatementDtoAccordingToRegistration(isRegisteredToFaculty);

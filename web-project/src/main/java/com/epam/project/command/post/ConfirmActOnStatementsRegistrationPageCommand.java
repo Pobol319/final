@@ -13,8 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ConfirmActOnStatementsRegistrationPageCommand implements Command {
-    private static final Logger LOG = LogManager.getRootLogger();
-    private static final String PAGE = "/view/page/usual/register_or_deregister_statements.jsp";
     private static final String PAGE_REGISTRATION = "/command?command=register_or_deregister_statements&registerOrDeregisterCommand=register";
     private static final String PAGE_DEREGISTRATION = "/command?command=register_or_deregister_statements&registerOrDeregisterCommand=deregister";
 
@@ -26,8 +24,6 @@ public class ConfirmActOnStatementsRegistrationPageCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        LOG.info("ConfirmActOnStatementsRegistrationPageCommand - done ");
-
         String registerOrDeregisterCommandString = request.getParameter("registerOrUnregisterCommand");
         boolean registerOrDeregisterCommandStringBoolean = !Boolean.parseBoolean(registerOrDeregisterCommandString);
 

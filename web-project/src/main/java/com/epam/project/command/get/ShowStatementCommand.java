@@ -17,9 +17,7 @@ import javax.servlet.http.HttpSession;
 
 
 public class ShowStatementCommand implements Command {
-    private static final Logger LOG = LogManager.getRootLogger();
     private static final String PAGE = "/view/page/usual/look_and_delete_statement.jsp";
-
     private StatementDtoService statementDtoService;
 
     public ShowStatementCommand(StatementDtoService statementDtoService) {
@@ -28,8 +26,6 @@ public class ShowStatementCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        LOG.info("ShowStatementCommand - done ");
-
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         Integer userId = user.getId();

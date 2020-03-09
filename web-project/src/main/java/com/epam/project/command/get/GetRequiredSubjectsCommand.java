@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class GetRequiredSubjectsCommand implements Command {
-    private static final Logger LOG = LogManager.getRootLogger();
     private static final String PAGE = "/command?command=apply_to_faculty";
 
     private FacultyDtoService facultyDtoService;
@@ -30,8 +29,6 @@ public class GetRequiredSubjectsCommand implements Command {
 
     @Override
     public CommandResult execute(HttpServletRequest request, HttpServletResponse response) throws ServiceException {
-        LOG.info("GetRequiredSubjectsCommand - done ");
-
         String facultyIdString = request.getParameter("facultyId");
         Integer facultyIdInt = Integer.parseInt(facultyIdString);
 

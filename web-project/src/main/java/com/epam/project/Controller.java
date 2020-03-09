@@ -24,19 +24,12 @@ public class Controller extends HttpServlet {
     private static final Logger LOG = LogManager.getRootLogger();
 
     @Override
-    public void destroy() {
-
-    }
-
-    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        LOG.info("doGet - done");
         processRequest(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        LOG.info("doPost - done");
         processRequest(req, resp);
     }
 
@@ -49,6 +42,7 @@ public class Controller extends HttpServlet {
             Command command = CommandFactory.create(commandName);
             commandResult = command.execute(request, response);
         } catch (Exception e) {
+            LOG.error(e);
             session.setAttribute("errorMessage", e);
             commandResult = CommandResult.forward(ERROR_PAGE);
         }
@@ -58,13 +52,10 @@ public class Controller extends HttpServlet {
 
     private void dispatch(HttpServletRequest req, HttpServletResponse resp, CommandResult commandResult
     ) throws ServletException, IOException {
-        LOG.info(commandResult.getPage());
         if(commandResult.isRedirect()){
-            LOG.info("command redirect - done");
             String url = req.getContextPath() + commandResult.getPage();
             resp.sendRedirect(url);
         } else {
-            LOG.info("command forward - done");
             RequestDispatcher requestDispatcher = getServletContext().getRequestDispatcher(commandResult.getPage());
             requestDispatcher.forward(req, resp);
         }
