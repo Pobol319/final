@@ -32,6 +32,10 @@ body {
     border: 1px solid white;
 }
 
+.centered h2 {
+   color: white;
+}
+
 .sign-in {
     width: 300px;
     margin: auto;

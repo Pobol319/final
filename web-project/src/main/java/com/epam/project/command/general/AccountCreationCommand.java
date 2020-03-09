@@ -31,6 +31,6 @@ public class AccountCreationCommand implements Command {
         userService.save(firstName, secondName, login, password, UserRoleEnum.USER);
 
         request.setAttribute("answerForRegistration", true);
-        return CommandResult.redirect(PAGE);
+        return CommandResult.forward(PAGE);
     }
 }

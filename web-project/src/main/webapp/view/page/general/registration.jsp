@@ -33,10 +33,10 @@
     <c:set var="answer" scope="page" value="${answerForRegistration}"/>
     <c:choose>
         <c:when test="${answer eq false}">
-            Account with such login is already registered!
+            <h2>Account with such login is already registered!</h2>
         </c:when>
         <c:when test="${answer eq true}">
-            Account created!
+            <h2>Account created!</h2>
         </c:when>
         <c:otherwise>
         </c:otherwise>

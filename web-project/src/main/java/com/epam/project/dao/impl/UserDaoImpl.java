@@ -43,7 +43,7 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
 
     @Override
     public void save(User item) throws DaoException {
-        updateTable(QUERY_CREATE_NEW_USER, item.getFirstName(), item.getSecondName(), item.getLogin(), item.getPassword(), item.getRole());
+        updateTable(QUERY_CREATE_NEW_USER, item.getFirstName(), item.getSecondName(), item.getLogin(), item.getPassword(), item.getRole().toString());
     }
 
     @Override
